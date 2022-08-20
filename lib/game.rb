@@ -34,9 +34,9 @@ class Game
     end
 
     def current_player
-        if a = self.board.cells.count(" ").even?  
-             self.player_2 
-        else self.player_1
+        if self.board.turn_count.even?
+             self.player_1
+        else self.player_2
         end
     end
 
@@ -75,14 +75,12 @@ class Game
     return self.board.cells[self.won?[0]] if self.won?
   end
 
-  def turn
-    self.board.display
-    current_player = self.current_player
-    if
-    self.board.update(position = current_player.move(self.board), current_player)
-    else current_player.move(self.board)
-    end
-end
+
+def turn
+   self.board.display
+
+   self.current_player unless self.board.update(current_player.move(@board), self.current_player)
+end 
 
 
 end

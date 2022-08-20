@@ -3,7 +3,6 @@ class Board
     attr_reader :token
 
     def initialize
-        @cells = cells
         self.reset!
     end
 
@@ -20,15 +19,15 @@ class Board
       end
 
       def position(input)
-        @cells[(input.strip.to_i - 1)]
+        @cells[(input.to_i - 1)]
       end
 
     def update(position, current_player)
-        self.position(position).replace "#{current_player.token}" if self.valid_move?(position)
+        cells[position.to_i-1] = current_player.token
     end
     
     def turn_count
-        @cells.count{|token| token == "X" || token == "O"}
+    @cells.count{|token| token == "X" || token == "O"}
     end
     
     def taken?(position)
@@ -40,7 +39,7 @@ class Board
     end
     
       def full?
-       !@cells.include?(" ") 
+       @cells.all?{|token| token == "X" || token == "O"}
       end
     
       
